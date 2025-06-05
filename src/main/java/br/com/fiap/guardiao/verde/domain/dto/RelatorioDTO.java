@@ -5,7 +5,11 @@ import java.util.Date;
 import br.com.fiap.guardiao.verde.domain.entity.Alerta;
 import br.com.fiap.guardiao.verde.domain.entity.Ocorrencia;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter	
 public class RelatorioDTO {
 	
 	@Schema(name = "Alerta", description = "Alerta", example = "12/12/12")

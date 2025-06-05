@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.guardiao.verde.domain.dto.OcorrenciaDTO;
+import br.com.fiap.guardiao.verde.domain.entity.Localizacao;
 import br.com.fiap.guardiao.verde.domain.entity.Ocorrencia;
 import br.com.fiap.guardiao.verde.domain.mapper.OcorrenciaMapper;
 import br.com.fiap.guardiao.verde.domain.repository.LocalizacaoRepository;
@@ -39,8 +40,13 @@ public class OcorrenciaService {
 			Ocorrencia ocorrenciaExists = optional.get();
 
 			ocorrenciaExists.setDataOcorrencia(ocorrenciaDTO.getDataOcorrencia());
-			ocorrenciaExists.setLocalizacao(ocorrenciaDTO.getLocalizacao());
 			ocorrenciaExists.setStatus(ocorrenciaDTO.getStatus());
+
+			Optional<Localizacao> localizacaoOpt = localizacaoRepository.findById(ocorrenciaDTO.getLocalizacao().getId());
+			if (localizacaoOpt.isEmpty()) {
+				throw new RuntimeException("Localização não encontrada com ID: " + ocorrenciaDTO.getLocalizacao().getId());
+			}
+			ocorrenciaExists.setLocalizacao(localizacaoOpt.get());
 
 			return ocorrenciaRepository.save(ocorrenciaExists);
 		}

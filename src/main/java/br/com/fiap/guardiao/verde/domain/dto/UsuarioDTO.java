@@ -2,7 +2,11 @@ package br.com.fiap.guardiao.verde.domain.dto;
 
 import br.com.fiap.guardiao.verde.domain.enums.TipoUsuario;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class UsuarioDTO {
 	
 	@Schema(name = "Nome", description = "Nome do usuario", example = "Henrique Rafael")
