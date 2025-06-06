@@ -18,7 +18,7 @@ import br.com.fiap.guardiao.verde.domain.entity.Localizacao;
 import br.com.fiap.guardiao.verde.service.LocalizacaoService;
 
 @RestController	
-@RequestMapping("v1/localizacao")
+@RequestMapping("/v1/localizacao")
 public class LocalizacaoController {
 
 	@Autowired

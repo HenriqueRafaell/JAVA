@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/alertas")
+@RequestMapping("/v1/alertas")
 public class AlertaController {
 
     private final AlertaService service;

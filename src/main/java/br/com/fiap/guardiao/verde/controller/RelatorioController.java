@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/relatorios")
+@RequestMapping("/v1/relatorios")
 public class RelatorioController {
 
     private final RelatorioService service;

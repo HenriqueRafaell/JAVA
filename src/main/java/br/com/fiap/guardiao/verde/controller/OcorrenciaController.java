@@ -20,7 +20,7 @@ import br.com.fiap.guardiao.verde.domain.repository.LocalizacaoRepository;
 import br.com.fiap.guardiao.verde.service.OcorrenciaService;
 
 @RestController	
-@RequestMapping("v1/ocorrencia") 
+@RequestMapping("/v1/ocorrencia") 
 public class OcorrenciaController {
 
 	
