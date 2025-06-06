@@ -1,26 +1,22 @@
 package br.com.fiap.guardiao.verde.domain.dto;
 
 import java.util.Date;
-
-import br.com.fiap.guardiao.verde.domain.entity.Alerta;
-import br.com.fiap.guardiao.verde.domain.entity.Ocorrencia;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter	
+@Setter
 public class RelatorioDTO {
-	
-	@Schema(name = "Alerta", description = "Alerta", example = "12/12/12")
-	private Alerta alerta;
-	
-	@Schema(name = "Ocorrencia", description = "Ocorrencia", example = "12/12/12")
-	private Ocorrencia ocorrencia;
-	
-	@Schema(name = "Data", description = "Data da ocorrencia", example = "12/12/12")
-	private Date dataRelatorio;
-	
-	@Schema(name = "Resumo", description = "Resumo da ocorrencia", example = "")
-	private String resumo;
+    @Schema(name = "Alerta", description = "ID do alerta", example = "2")
+    private Long alertaId;
+
+    @Schema(name = "Ocorrencia", description = "ID da ocorrência", example = "21")
+    private Long ocorrenciaId;
+
+    @Schema(name = "Data", description = "Data do relatório", example = "2025-06-06T18:00:00Z")
+    private Date dataRelatorio;
+
+    @Schema(name = "Resumo", description = "Resumo da ocorrência", example = "")
+    private String resumo;
 }

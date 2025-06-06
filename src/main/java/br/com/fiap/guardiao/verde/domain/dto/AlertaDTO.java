@@ -15,7 +15,7 @@ import lombok.Setter;
 public class AlertaDTO { 
 	
 	@Schema(name = "Ocorrencia", description = "Ocorrencia", example = "12/12/12")
-	private Ocorrencia ocorrencia;
+	private OcorrenciaIdDTO ocorrencia;
 	
 	@Schema(name = "Data", description = "Data de envio do Alerta", example = "12/12/12")
 	private Date dataEnvio;

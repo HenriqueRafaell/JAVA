@@ -17,12 +17,12 @@ public class RelatorioController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/buscarTodos")
     public List<RelatorioDTO> getAll() {
         return service.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<RelatorioDTO> create(@RequestBody RelatorioDTO dto) {
         RelatorioDTO created = service.save(dto);
         return ResponseEntity.ok(created);

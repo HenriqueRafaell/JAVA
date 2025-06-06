@@ -33,7 +33,7 @@ public class Ocorrencia {
 	@Column(name = "id_ocorrencia")
 	private Long id;
 	private Date dataOcorrencia;
-    @Enumerated(EnumType.ORDINAL) 
+    @Enumerated(EnumType.STRING) 
 	private StatusOcorrencia status;
 	@ManyToOne
     @JoinColumn(name = "id_local")

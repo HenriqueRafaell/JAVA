@@ -17,12 +17,12 @@ public class AlertaController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/buscarTodos")
     public List<AlertaDTO> getAll() {
         return service.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<AlertaDTO> create(@RequestBody AlertaDTO dto) {
         AlertaDTO created = service.save(dto);
         return ResponseEntity.ok(created);

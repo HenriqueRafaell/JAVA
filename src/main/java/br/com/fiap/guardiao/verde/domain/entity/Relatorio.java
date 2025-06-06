@@ -2,6 +2,7 @@ package br.com.fiap.guardiao.verde.domain.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class Relatorio {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "id_relatorio")
 	private Long id;
 	@ManyToOne
 	@JoinColumn(name="id_alerta")

@@ -17,12 +17,12 @@ public class UsuarioController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/buscarTodos")
     public List<UsuarioDTO> getAll() {
         return service.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<UsuarioDTO> create(@RequestBody UsuarioDTO dto) {
         UsuarioDTO created = service.save(dto);
         return ResponseEntity.ok(created);
