@@ -2,7 +2,6 @@ package br.com.fiap.guardiao.verde.domain.dto;
 
 import java.util.Date;
 
-import br.com.fiap.guardiao.verde.domain.entity.Ocorrencia;
 import br.com.fiap.guardiao.verde.domain.enums.PrioridadeAlerta;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

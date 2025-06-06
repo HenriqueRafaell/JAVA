@@ -1,6 +1,13 @@
 package br.com.fiap.guardiao.verde.controller;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -9,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import java.util.Base64;
 
 @RestController
 @RequestMapping("/v1/login")
@@ -46,7 +53,7 @@ public class AuthController {
             );
 
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String token = generateToken(userDetails.getUsername());
+            String token = generateToken(userDetails);
 
             return ResponseEntity.ok(new JwtResponse(token));
         } catch (AuthenticationException ex) {
@@ -54,18 +61,28 @@ public class AuthController {
         }
     }
 
-    private String generateToken(String username) {
+    private String generateToken(UserDetails userDetails) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
 
+        Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
+        List<String> roles = authorities.stream()
+            .map(auth -> auth.getAuthority().replace("ROLE_", ""))
+            .toList();
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("roles", roles);
+
+        SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+
         return Jwts.builder()
-                .setSubject(username)
+                .setClaims(claims)
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(Keys.hmacShaKeyFor(Base64.getDecoder().decode(jwtSecret)), SignatureAlgorithm.HS512)
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
-
 
     public static class LoginRequest {
         private String email;
@@ -77,7 +94,6 @@ public class AuthController {
         public String getSenha() { return senha; }
         public void setSenha(String senha) { this.senha = senha; }
     }
-
 
     public static class JwtResponse {
         private String token;
