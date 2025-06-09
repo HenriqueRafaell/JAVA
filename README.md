@@ -87,3 +87,4 @@ Este projeto simula um cenário real de resposta a queimadas, promovendo cidadan
 - Integração com sensores IoT
 - Interface web ou mobile
 
+##LINK DO VIDEO https://youtu.be/29q2q7f0uiA
